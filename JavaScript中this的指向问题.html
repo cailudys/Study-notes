@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  
+        // 一、普通函数
+        // 函数中本身的this的指向？
+        // 函数中嵌套的函数里面的this的指向？
+        // 普通函数的this指向它最后的一个调用者。函数中嵌套的函数里面的this也指向他的调用者，如定时函数中的this指向window对象。
+
+
+        // 二、构造函数this指向问题。
+        // 构造函数this指向问题，在new时才有意义，指向新创建出来的对象实例。
+
+        // 三、箭头函数this指向问题。
+        let obj ={
+            name:"obj",
+            test1:function(){
+                document.getElementById("d1").addEventListener("click",()=>{
+                    console.log("test1",this);
+                })
+            },
+            test2:()=>{
+                document.getElementById("d1").addEventListener("click",()=>{
+                    console.log("test2",this);
+                })
+            },
+            test3:()=>{
+                console.log("test3",this);
+            }
+        }
+        obj.test3();
+        obj.test1();
+        obj.test2();
+
+
+        // 箭头函数中没有this绑定，必须通过查找作用域来确定其值，简单来说就是this绑定的是最近一层非箭头函数的this（如果最近一层不是函数（对象没有作用域）则this指向全局对象window）。
+        // 1、test1中的箭头函数的this指向的是test1函数内部绑定的this,即obj
+        // 2、test2中的箭头函数的外层还是箭头函数，得再往外找一层，找到了obj的外层，即window
+        // 3、test3中的箭头函数的外层是obj的外层，即window
+        // 其实test2与test3是一样的，不管在方法里面嵌套几层箭头函数
+        // 楼主要搞清楚的是test1,test2,test3是obj的一等方法，再往上就是obj的外面了， 不在obj内部了。
+
+        // 作者：lanse_yan
+        // 链接：https://segmentfault.com/q/1010000018277121#answer-1020000018277745
+        // 来源：SegmentFault 思否
+        // 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
+
+        // 四、使用call,apply,bind(ES5新增)绑定的,this指的是 绑定的对象
+
+
+        //拓展：js里以函数为作用域划分，object(对象)里面的（属性）a并不是一个单独的变量，要访问它只能通过object（对象）.a（属性）来访问。
+        //也就是说虽然对象没有作用域，但对象里的属性值只能通过对象点属性来获得，而不能认为对象没有作用域就可以直接获取对象中的属性值。
+        //对象里面的属性并不是一个单独的变量，而是和对象时一个整体，是一个复杂数据类型。
+    </script>        
+
+</body>
+</html>

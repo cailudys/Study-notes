@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 这是一个构造函数，构造函数在写法上和普通函数几乎是一样的。
+    //（如何判断一个函数是否是构造函数？ 看用途，函数内有公共属性方法等，专门配合new使用来创建对象的就是构造函数）
+    function Person(name) {
+      this.name = name
+    }
+    // 这是直接调用构造函数，调用时this指向全局对象window，相当于给window加了一个name属性值为“zhangxueyou”，这样使用完全没有意义！
+    Person("zhangxueyou");
+    // 正确用法：用new关键字来创建一个具体的对象实例
+    var zhangxueyou = new Person("张学友");
+    // new Person("张学友"); 执行时，函数的this是指向zhangxueyou这个实例对象的！所以代码执行后就是给zhangxueyou这个实例对象，添加了一个name属性，值为“zhangxueyou”
+
+    /*
+      总结：1、区分构造函数和普通函数，主要要判断这个函数的使用目的，用来处理事务的就是普通函数，用来和new关键字配合创建对象的就是构造函数。
+            2、使用new会改变构造函数中的this指向，new构造函数时，构造函数中的this会指向这个new出来的实例对象。
+            3、要知道，this的指向问题要函数被调用（执行）的时候才有意义！
+
+    */
+  </script>
+</body>
+
+</html>
